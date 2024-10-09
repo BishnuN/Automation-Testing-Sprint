@@ -41,8 +41,7 @@ class UserLoginTest(unittest.TestCase):
     # TS_01_TC_01 - Valid login testing with correct email and password
     def test_login_success(self):
         driver = self.driver
-        self.login("saru73@yopmail.com","12345")
-        #assert:check result
+        self.login("saru73@yopmail.com", "12345")
         expected_result ="Sign out"
         actual_result = driver.find_element(By.XPATH, UserLoginLocators.signout).text
         self.assertEqual(expected_result, actual_result, "test_login_success passed")
