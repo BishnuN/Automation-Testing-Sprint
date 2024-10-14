@@ -1,6 +1,4 @@
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,7 +13,7 @@ class AddToCartPage:
         self.driver = driver
 
     def find_cart_icon(self):
-        return self.driver.find_element(By.XPATH,AddToCartLocator.cart_icon)
+        return self.driver.find_element(By.XPATH, AddToCartLocator.cart_icon)
     
     def hover_to_cart_icon(self):
         icon = WebDriverWait(self.driver,10).until (
