@@ -5,12 +5,14 @@ from selenium.webdriver.common.by import By
 
 from Locators.Purchase_product_Locator import Purchaselocate
 from Unit_testing.User_login_testing import UserLoginTest
+from Pages.AddToCartPage import AddToCartPage
 
 class PurchasePage:
     def __init__(self, driver):
         self.random = None
         self.driver = driver
         self.location = Purchaselocate
+        self.cart = AddToCartPage(self.driver)
 # Product adding function need to call here
 
     def navCart(self):
@@ -75,16 +77,7 @@ class PurchasePage:
         empty = self.driver.find_element(By.XPATH, '//*[@id="header"]/div[3]/div/div/div[3]/div/a/span[5]')
         if empty:
             time.sleep(1)
-            cart_hover = self.driver.find_element(By.XPATH, '//*[@id="blocknewproducts"]/li/div/div[1]/div/a[1]/img')
-            actions = ActionChains(self.driver)
-            actions.move_to_element(cart_hover).perform()
-            time.sleep(1)
-            cart = self.driver.find_element(By.XPATH, '//*[@id="blocknewproducts"]/li/div/div[2]/div[2]/a[1]/span')
-            cart.click()
-            time.sleep(1)
-            close = self.driver.find_element(By.XPATH, '//*[@id="layer_cart"]/div[1]/div[1]/span[1]')
-            close.click()
-            time.sleep(1)
+            self.cart.add_first_item_to_cart()
     def purchasefirst(self):
         print("Checking for empty cart...")
         self.check_for_empty_cart()
