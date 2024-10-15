@@ -5,14 +5,14 @@ from selenium.webdriver.common.by import By
 
 from Locators.Purchase_product_Locator import Purchaselocate
 from Unit_testing.User_login_testing import UserLoginTest
-from Pages.AddToCartPage import AddToCartPage
+from Unit_testing.add_to_cart_testing import AddToCartTestCase
 
 class PurchasePage:
     def __init__(self, driver):
         self.random = None
         self.driver = driver
         self.location = Purchaselocate
-        self.cart = AddToCartPage(self.driver)
+        self.cart = AddToCartTestCase(self.driver)
 # Product adding function need to call here
 
     def navCart(self):
