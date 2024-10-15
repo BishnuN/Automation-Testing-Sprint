@@ -1,4 +1,3 @@
-
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,19 +6,17 @@ import time
 
 from Locators.AddToCartLocator import AddToCartLocator
 
+
 class AddToCartPage:
-    def __init__(self,driver):
-        self.random = None
+    def __init__(self, driver):
         self.driver = driver
 
     def find_cart_icon(self):
         return self.driver.find_element(By.XPATH, AddToCartLocator.cart_icon)
-    
+
     def hover_to_cart_icon(self):
-        icon = WebDriverWait(self.driver,10).until (
-            EC.visibility_of_element_located(
-                (By.XPATH, AddToCartLocator.cart_icon)
-            )
+        icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, AddToCartLocator.cart_icon))
         )
         ActionChains(self.driver).move_to_element(icon).perform()
 
@@ -29,24 +26,32 @@ class AddToCartPage:
         ).text
 
     def get_first_item(self):
-        return self.driver.find_element (By.XPATH,AddToCartLocator.first_Item_Xpath)
+        # return WebDriverWait(self.driver, 10).until(
+        #     EC.visibility_of_element_located((By.XPATH, AddToCartLocator.first_Item_Xpath))
+        # )
+        first_item = self.driver.find_element(By.XPATH, AddToCartLocator.first_Item_Xpath)
+        return first_item
 
     def get_cart_count(self):
-        return self.driver.find_elemt(By.XPATH,AddToCartLocator.cart_count)
+        return self.driver.find_element(By.XPATH, AddToCartLocator.cart_count)
 
     def scroll_to_first_item(self):
-        #find first element
-        first_item = self.get_first_item()
+        # first_item = self.get_first_item()
+        # self.driver.execute_script("arguments[0].scrollIntoView();", first_item)
+        self.driver.execute_script("window.scrollTo(0,1000)")
+        time.sleep(2)
+        first_item = self.driver.find_element(By.XPATH, AddToCartLocator.first_Item_Xpath)
+        return first_item
 
-    def get_add_to_cart_button(self,item):
-        return item.find_element(By.XPATH,AddToCartLocator.add_To_Cart_button)
-    
+    def get_add_to_cart_button(self):
+        return self.driver.find_element(By.XPATH, AddToCartLocator.add_To_Cart_button)
+
     def add_first_item_to_cart(self):
         self.scroll_to_first_item()
-        self.driver.implicitly.wait(10)
-        first_item= self.get_first_item()
-        self.driver.execute_script("executing :",first_item)
-        add_to_cart_button = self.get_add_to_cart_button(first_item)
-        add_to_cart_button.click()
-
-    
+        first_item = self.get_first_item()
+        add_to_cart_button = self.get_add_to_cart_button()
+        button_click= ActionChains(self.driver)
+        button_click.move_to_element(first_item).click(add_to_cart_button).perform()
+        time.sleep(2)
+        button_click.move_to_element(first_item).perform()
+        time.sleep(2)
