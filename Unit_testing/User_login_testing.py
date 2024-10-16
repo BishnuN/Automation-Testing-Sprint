@@ -44,7 +44,7 @@ class UserLoginTest(unittest.TestCase):
         self.login("saru73@yopmail.com", "12345")
         expected_result ="Sign out"
         actual_result = driver.find_element(By.XPATH, UserLoginLocators.signout).text
-        self.assertEqual(expected_result, actual_result, "test_login_success passed")
+        self.assertEqual(expected_result, actual_result, "test_login_success")
 
     # TS_o4_TC_01- Verify that the user profile (image and username) is displayed in the right corner after successful login
     def test_User_profile(self):
@@ -53,7 +53,7 @@ class UserLoginTest(unittest.TestCase):
         # assert:check result
         expected_result = "Saru gyawali"
         actual_result = driver.find_element(By.XPATH, UserLoginLocators.UsernameText).text
-        self.assertEqual(expected_result, actual_result, "test_User_profile passed")
+        self.assertEqual(expected_result, actual_result, "test_User_profile")
 
     # TS_02_TC_01 - Validate logging into the Application using incorrect credentials by using E-mail
     def test_login_invalid_email(self):
@@ -61,7 +61,7 @@ class UserLoginTest(unittest.TestCase):
         #assert:check result
         expected_result ="There is 1 error"
         actual_result = self.driver.find_element(By.XPATH, UserLoginLocators.ErrorMsg).text
-        self.assertEqual(expected_result, actual_result, "test_login_invalid_email passed")
+        self.assertEqual(expected_result, actual_result, "test_login_invalid_email")
 
     # TS_03_TC_01 - Validate login button  when the E-mail field is left empty
     def test_login_empty_email(self):
@@ -69,7 +69,7 @@ class UserLoginTest(unittest.TestCase):
         # assert:check result
         expected_result = "There is 1 error"
         actual_result = self.driver.find_element(By.XPATH, UserLoginLocators.ErrorMsg).text
-        self.assertEqual(expected_result, actual_result, "test_login_empty_email passed")
+        self.assertEqual(expected_result, actual_result, "test_login_empty_email")
 
     # TS_03_TC_02 - Validate login button when the Password field is left empty
     def test_login_empty_password(self):
@@ -77,7 +77,7 @@ class UserLoginTest(unittest.TestCase):
         # assert:check result
         expected_result = "There is 1 error"
         actual_result = self.driver.find_element(By.XPATH, UserLoginLocators.ErrorMsg).text
-        self.assertEqual(expected_result, actual_result, "test_login_empty_password passed")
+        self.assertEqual(expected_result, actual_result, "test_login_empty_password")
 
     # TS_03_TC_03- Validate login button  when Email and password both are left empty
     def test_login_empty_email_and_password(self):
@@ -85,7 +85,7 @@ class UserLoginTest(unittest.TestCase):
         # assert:check result
         expected_result = "There is 1 error"
         actual_result = self.driver.find_element(By.XPATH, UserLoginLocators.ErrorMsg).text
-        self.assertEqual(expected_result, actual_result, "test_login_empty_email_and_password passed")
+        self.assertEqual(expected_result, actual_result, "test_login_empty_email_and_password")
 
 
 
