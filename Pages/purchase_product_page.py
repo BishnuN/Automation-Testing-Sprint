@@ -16,8 +16,11 @@ class PurchasePage:
 # Product adding function need to call here
 
     def navCart(self):
-        navC = self.driver.find_element(By.XPATH, self.location.navCart)
-        return navC
+        self.driver.execute_script("window.scrollTo(0,0)")
+        time.sleep(2)
+        navCartLocation = self.driver.find_element(By.XPATH, self.location.navCart)
+        time.sleep(2)
+        return navCartLocation
 
     def cart_Click(self):
         self.navCart().click()
@@ -68,10 +71,13 @@ class PurchasePage:
         self.ConfirmOrderr().click()
 
     def check_and_click_insertData(self, email, password):
+        self.driver.get("https://qaecoma.bishalkarki.xyz/index.php?controller=authentication&back=https%3A%2F%2Fqaecoma.bishalkarki.xyz%2Findex.php%3Fcontroller%3Dorder%26step%3D1")
         signin = self.driver.find_element(By.ID, 'email')
         signin.click()
         if signin:
            UserLoginTest.login(self, email, password)
+           time.sleep(2)
+
 
     def check_for_empty_cart(self):
         empty = self.driver.find_element(By.XPATH, '//*[@id="header"]/div[3]/div/div/div[3]/div/a/span[5]')

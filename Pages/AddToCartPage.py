@@ -53,8 +53,12 @@ class AddToCartPage:
         self.scroll_to_first_item()
         first_item = self.get_first_item()
         add_to_cart_button = self.get_add_to_cart_button()
+        close_cart = self.driver.find_element(By.XPATH, CartLocator.close_cart)
         button_click = ActionChains(self.driver)
         button_click.move_to_element(first_item).click(add_to_cart_button).perform()
         time.sleep(2)
         button_click.move_to_element(first_item).perform()
         time.sleep(2)
+        button_click.click(close_cart).perform()
+        time.sleep(2)
+

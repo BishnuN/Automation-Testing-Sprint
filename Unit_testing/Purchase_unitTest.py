@@ -9,7 +9,7 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
-        self.driver.get("https://qaecoma.bishalkarki.xyz/index.php")
+        self.driver.get("https://qaecoma.bishalkarki.xyz/index.php?id_category=3&controller=category")
         self.cr = PurchasePage(self.driver)
 
     def tearDown(self):

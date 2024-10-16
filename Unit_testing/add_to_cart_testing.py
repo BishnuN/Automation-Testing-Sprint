@@ -4,7 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from Pages.AddToCartPage import AddToCartPage
-from Locators.AddToCartLocator import AddToCartLocator
 
 class AddToCartTestCase(unittest.TestCase):
 

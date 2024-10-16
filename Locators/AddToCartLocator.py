@@ -4,4 +4,5 @@ class CartLocator:
     cart_icon = '//*[@id="header"]/div[3]/div/div/div[3]/div'
     cart_count = '//*[@id="header"]/div[3]/div/div/div[3]/div/a/span[1]'
     cart_detail = '//*[@id="header"]/div[3]/div/div/div[3]/div/a'
+    close_cart = '//*[@id="layer_cart"]/div[1]/div[1]/span[1]'
 
