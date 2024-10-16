@@ -1,15 +1,16 @@
 import time
-
+import random
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from Locators.Purchase_product_Locator import Purchaselocate
 from Unit_testing.User_login_testing import UserLoginTest
 from Pages.AddToCartPage import AddToCartPage
 
 class PurchasePage:
     def __init__(self, driver):
-        self.random = None
+        self.random = random
         self.driver = driver
         self.location = Purchaselocate
         self.cart = AddToCartPage(self.driver)
@@ -33,7 +34,8 @@ class PurchasePage:
         self.checkbtn1().click()
 
     def checkbtn2(self):
-        checkout2_locator = self.driver.find_element(By.XPATH, self.location.checkoutButton2)
+        wait = WebDriverWait(self.driver, 10)
+        checkout2_locator = wait.until(EC.element_to_be_clickable((By.XPATH, self.location.checkoutButton2)))
         return checkout2_locator
 
     def checkbtn2click(self):
@@ -60,7 +62,7 @@ class PurchasePage:
 
     def paymentClick(self):
         payment1, payment2 = self.paymentMethod()
-        random_element = self.random.choice(payment1, payment2)
+        random_element = self.random.choice([payment1, payment2])  # Wrap the options in a list
         random_element.click()
 
     def ConfirmOrderr(self):
@@ -71,13 +73,14 @@ class PurchasePage:
         self.ConfirmOrderr().click()
 
     def check_and_click_insertData(self, email, password):
-        self.driver.get("https://qaecoma.bishalkarki.xyz/index.php?controller=authentication&back=https%3A%2F%2Fqaecoma.bishalkarki.xyz%2Findex.php%3Fcontroller%3Dorder%26step%3D1")
+
         signin = self.driver.find_element(By.ID, 'email')
         signin.click()
         if signin:
+          #  self.driver.get("https://qaecoma.bishalkarki.xyz/index.php?controller=authentication&back=https%3A%2F%2Fqaecoma.bishalkarki.xyz%2Findex.php%3Fcontroller%3Dorder%26step%3D1")
            UserLoginTest.login(self, email, password)
            time.sleep(2)
-
+        self.driver.get("https://qaecoma.bishalkarki.xyz/index.php?controller=order&step=1")
 
     def check_for_empty_cart(self):
         empty = self.driver.find_element(By.XPATH, '//*[@id="header"]/div[3]/div/div/div[3]/div/a/span[5]')
